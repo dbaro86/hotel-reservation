@@ -11,6 +11,9 @@ class StatusRoom(models.Model):
 class StatusReservation(models.Model):
     pass
 
+class TypeRoom(models.Model):
+    pass
+
 class Room(models.Model):
     pass
 
