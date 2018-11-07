@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common.apps.CommonConfig',
+    'rest_framework',
+    'rest_framework_swagger',
+    'rest_framework.authtoken',
     'hotel.apps.HotelConfig',
     'reservation.apps.ReservationConfig',
+    # 'lettuce.django',
 ]
 
 MIDDLEWARE = [

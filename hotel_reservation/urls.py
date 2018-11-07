@@ -15,7 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from hotel.views import CompanyViewSets, HotelViewSets, StatusRoomViewSets, TypeRoomViewSets, \
+    RoomViewSets
+
+from reservation.views import StatusReservationViewSets
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+
+router.register('companies', CompanyViewSets)
+router.register('hotels', HotelViewSets)
+router.register('statusroom', StatusRoomViewSets)
+router.register('statusreservation', StatusReservationViewSets)
+router.register('typeroom', TypeRoomViewSets)
+router.register('room', RoomViewSets)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += router.urls
+
+
