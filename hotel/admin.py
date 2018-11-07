@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import *
+from .models import Company, Hotel, StatusRoom, TypeRoom, Room
 # Register your models here.
 
 @admin.register(Company)
@@ -13,7 +13,17 @@ class HotelAdmin(admin.ModelAdmin):
     list_display = ('company', 'name', 'address', 'created_at', 'updated_at')
 
 
-admin.site.register(StatusRoom)
-admin.site.register(StatusReservation)
-admin.site.register(TypeRoom)
-admin.site.register(Room)
+
+@admin.register(StatusRoom)
+class StatusRoomAdmin(admin.ModelAdmin):
+    list_display = ['denomination', 'description']
+
+
+@admin.register(TypeRoom)
+class TypeRoomAdmin(admin.ModelAdmin):
+    list_display = ['room_type', 'description']
+
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ['hotel', 'room_type', ]

@@ -10,6 +10,7 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+
 class Hotel(models.Model):
     company = models.ForeignKey(Company, on_delete=True)
     name = models.CharField(max_length=130)
@@ -26,6 +27,7 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
 
+
 class StatusRoom(models.Model):
     STATUS_ROOM = (
         ('DB', 'Dirty_Busy'),
@@ -36,37 +38,20 @@ class StatusRoom(models.Model):
     denomination = models.CharField(max_length=120, choices=STATUS_ROOM)
     description = models.TextField()
 
-class StatusReservation(models.Model):
-    STATUS_ROOM = (
-        ('R', 'RESERVED'),
-        ('RQ', 'REQUESTED'),
-        ('A', 'AVAILABLE'),
-        ('P', 'PROGRESS')
-    )
-    denomination = models.CharField(max_length=120, choices=STATUS_ROOM)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.denomination
-
 class TypeRoom(models.Model):
-    name = models.CharField(max_length=120)
-    price = models.FloatField()
+    room_choice = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('P', 'Reserved for Research Scholars'),
+                   ('B', 'Both Single and Double Occupancy')]
+    room_type = models.CharField(choices=room_choice, max_length=1, default=None)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="type_room/", null=True, blank=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
-
     def __str__(self):
         return self.name
 
 class Room(models.Model):
     hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE)
     room_type = models.ForeignKey(TypeRoom, on_delete=False)
-    capacity = models.IntegerField(default = 0)
-    bedOption = models.CharField(max_length  = 255)
     price = models.FloatField()
-    view = models.CharField(max_length  = 255)
-    total_rooms = models.CharField(max_length  = 255)
     check_in = models.DateTimeField(auto_now_add=True)
     check_out = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
